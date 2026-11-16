@@ -12,6 +12,14 @@ For any reviews file you give it:
 - `reports/theme_metrics.csv` and `reports/monthly_trends.csv`: ready for Power BI or Tableau
 - Charts: rating distribution, top pain points by impact, monthly average rating
 
+## Sample output
+
+Generated from **synthetic demo reviews** (not real findings), so you can see the format:
+
+![Top pain points, synthetic demo](docs/demo/top_pain_points.png)
+
+See [`docs/demo/report.md`](docs/demo/report.md) for the full sample report.
+
 ## Quick start
 
 ```bash
