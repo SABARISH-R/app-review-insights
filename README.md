@@ -58,3 +58,6 @@ Theme tagging is keyword-based, so it misses paraphrases and cannot tell praise 
 ## License
 
 MIT
+
+## Results
+See [RESULTS.md](RESULTS.md).
