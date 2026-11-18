@@ -1,5 +1,7 @@
 # ReviewLens: from app reviews to a prioritised product recommendation
 
+> **Interactive case study:** https://sabarish-r.github.io/app-review-insights/ (served from `docs/index.html`; enable GitHub Pages → main → /docs)
+
 A small analytics tool plus a case-study template. It takes a CSV of app reviews (text, star rating, date), tags each review with product themes (crashes, ads, pricing, login, and so on), and ranks the themes by **how many rating points they cost the product**. It then produces charts and CSVs you can load into Power BI or Tableau.
 
 The point is not the code. It is the workflow a product manager follows: define the question, measure, rank by impact, recommend one thing, and say how you would test it.

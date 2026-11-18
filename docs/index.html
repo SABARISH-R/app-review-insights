@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ReviewLens — case study</title><style>
+:root{--bg:#fafaf7;--ink:#1d1d1f;--mut:#5f6368;--line:#e3e3de;--acc:#1a73e8;--warn:#b3261e;--card:#fff;--ok:#188038}
+*{box-sizing:border-box}body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--ink)}
+main{max-width:920px;margin:0 auto;padding:48px 24px 80px}
+.kicker{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--acc);font-weight:600}
+h1{font-size:38px;line-height:1.15;margin:8px 0 12px;letter-spacing:-.02em}
+h2{font-size:22px;margin:48px 0 12px;padding-top:24px;border-top:1px solid var(--line)}
+.lede{font-size:19px;color:var(--mut);max-width:720px}
+.links a{display:inline-block;margin:16px 12px 0 0;padding:8px 14px;border:1px solid var(--ink);border-radius:999px;color:var(--ink);text-decoration:none;font-size:14px}
+.links a.p{background:var(--ink);color:#fff}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:28px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+.stat b{display:block;font-size:28px;letter-spacing:-.02em}.stat span{font-size:13px;color:var(--mut)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px}
+.card h3{margin:0 0 6px;font-size:15px}.card p{margin:0;color:var(--mut);font-size:15px}
+.demo{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px}
+label{font-size:14px;color:var(--mut);display:block;margin:10px 0 4px}
+input,select{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;width:100%;background:#fff}
+input[type=range]{padding:0}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.out{margin-top:16px;padding:14px 16px;border-radius:8px;background:#f1f3f4;font-size:15px}
+.out.good{background:#e6f4ea}.out.bad{background:#fce8e6}
+button{font:inherit;padding:8px 14px;border-radius:8px;border:1px solid var(--ink);background:var(--ink);color:#fff;cursor:pointer}
+button.ghost{background:#fff;color:var(--ink)}
+.chips button{margin:4px 6px 4px 0;font-size:13px;padding:5px 10px}
+.banner{background:#fef7e0;border:1px solid #f9e1a0;border-radius:8px;padding:10px 14px;font-size:14px;margin:12px 0}
+img{max-width:100%;border:1px solid var(--line);border-radius:8px;background:#fff}
+table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left}
+.bar{height:14px;border-radius:3px}
+.src{font-size:13px;color:var(--mut)}
+ol li,ul li{margin:4px 0}
+footer{margin-top:64px;color:var(--mut);font-size:13px}
+</style></head><body><main>
+<div class="kicker">User research at scale · Prioritisation</div>
+<h1>ReviewLens: turning thousands of app reviews into one prioritised recommendation</h1>
+<p class="lede">Teams usually triage reviews by volume ("lots of people mention the UI"). Volume is the wrong signal. ReviewLens ranks each theme by how many rating points it actually costs the product, so the roadmap starts with the problem that hurts most.</p>
+<div class="links"><a class="p" href="https://github.com/SABARISH-R/app-review-insights">View code</a><a href="RECOMMENDATION_TEMPLATE.md">Recommendation template</a><a href="METHODOLOGY.md">Methodology</a></div>
+<div class="banner"><b>Synthetic demo data.</b> Every number below comes from 1,500 generated reviews and shows what the tool produces. These are not findings about any real app.</div>
+<div class="stats"><div class="stat"><b>1,500</b><span>reviews cleaned and tagged</span></div><div class="stat"><b>10</b><span>product themes tagged</span></div><div class="stat"><b>Impact</b><span>= share of reviews × rating gap</span></div><div class="stat"><b>6 / 6</b><span>unit tests passing</span></div></div>
+
+<h2>The product question</h2>
+<div class="grid"><div class="card"><h3>Question</h3><p>Which single problem, if fixed, would raise the average rating the most?</p></div><div class="card"><h3>Why volume misleads</h3><p>In the demo, UI/UX is mentioned most (15.5% of reviews) but those reviews are positive. Crashes are mentioned less and cost far more.</p></div><div class="card"><h3>Output a PM can act on</h3><p>A ranked table, three charts and CSVs for Power BI/Tableau, plus a one-page recommendation template.</p></div><div class="card"><h3>How I'd validate</h3><p>Hand-label 100 reviews to measure tagging precision; then A/B test the fix and watch rating + crash-free sessions.</p></div></div>
+
+<h2>Explore: volume vs. impact</h2>
+<div class="demo">
+<label>Rank themes by</label>
+<select id="metric"><option value="impact">Impact (rating points lost)</option><option value="mentions">Mentions (volume)</option><option value="share_of_low_rated">Share of 1–2★ reviews</option><option value="avg_rating_when_mentioned">Avg rating when mentioned</option></select>
+<div id="chart" style="margin-top:16px"></div>
+<div class="out" id="insight"></div>
+</div>
+
+<h2>Sample report output</h2>
+<img src="demo/top_pain_points.png" alt="Top pain points (synthetic)">
+<div class="row" style="margin-top:12px"><img src="demo/rating_distribution.png" alt="Rating distribution (synthetic)"><img src="demo/monthly_rating.png" alt="Monthly rating (synthetic)"></div>
+
+<h2>Decisions and trade-offs</h2>
+<ul>
+<li><b>Keyword themes over an ML classifier</b> for v1: transparent, editable by a PM, and testable. Precision is the open risk, so it's the first thing to measure.</li>
+<li><b>"Reliable" flag at ≥30 mentions</b>, so the tool won't let a theme with five angry reviews top the roadmap.</li>
+<li><b>Impact is correlational</b>: low ratings co-occur with a theme; the A/B test is what proves causation.</li>
+</ul>
+<h2>Next</h2>
+<ol><li>Run on a real public review dataset and publish the top three pain points.</li><li>Measure tagging precision on a 100-review hand-labelled sample.</li><li>Write the recommendation memo for the #1 issue.</li></ol>
+
+<footer>Built by Sabarish R · Everything on this page is reproducible from the repository · <a href="https://github.com/SABARISH-R/app-review-insights/blob/main/RESULTS.md">RESULTS.md</a></footer></main>
+<script>const D=[{"theme": "crashes_bugs", "mentions": 125.0, "share_of_reviews": 0.08333333333333333, "share_of_low_rated": 0.1971608832807571, "avg_rating_when_mentioned": 1.36, "rating_gap": 1.8533333333333333, "impact": 0.15444444444444444, "reliable": "True"}, {"theme": "ads", "mentions": 137.0, "share_of_reviews": 0.09133333333333334, "share_of_low_rated": 0.21608832807570977, "avg_rating_when_mentioned": 1.6569343065693432, "rating_gap": 1.5563990267639902, "impact": 0.14215111111111112, "reliable": "True"}, {"theme": "login_account", "mentions": 92.0, "share_of_reviews": 0.06133333333333333, "share_of_low_rated": 0.14511041009463724, "avg_rating_when_mentioned": 1.3478260869565217, "rating_gap": 1.8655072463768116, "impact": 0.11441777777777777, "reliable": "True"}, {"theme": "performance", "mentions": 133.0, "share_of_reviews": 0.08866666666666667, "share_of_low_rated": 0.167192429022082, "avg_rating_when_mentioned": 1.9548872180451127, "rating_gap": 1.2584461152882207, "impact": 0.11158222222222224, "reliable": "True"}, {"theme": "pricing", "mentions": 112.0, "share_of_reviews": 0.07466666666666667, "share_of_low_rated": 0.12460567823343849, "avg_rating_when_mentioned": 2.294642857142857, "rating_gap": 0.9186904761904762, "impact": 0.06859555555555556, "reliable": "True"}, {"theme": "support", "mentions": 53.0, "share_of_reviews": 0.035333333333333335, "share_of_low_rated": 0.083596214511041, "avg_rating_when_mentioned": 1.320754716981132, "rating_gap": 1.8925786163522014, "impact": 0.06687111111111112, "reliable": "True"}, {"theme": "updates", "mentions": 61.0, "share_of_reviews": 0.04066666666666666, "share_of_low_rated": 0.06624605678233439, "avg_rating_when_mentioned": 2.3114754098360657, "rating_gap": 0.9018579234972677, "impact": 0.03667555555555555, "reliable": "True"}, {"theme": "battery_data", "mentions": 61.0, "share_of_reviews": 0.04066666666666666, "share_of_low_rated": 0.06624605678233439, "avg_rating_when_mentioned": 2.3114754098360657, "rating_gap": 0.9018579234972677, "impact": 0.03667555555555555, "reliable": "True"}, {"theme": "missing_features", "mentions": 89.0, "share_of_reviews": 0.059333333333333335, "share_of_low_rated": 0.0, "avg_rating_when_mentioned": 3.4157303370786516, "rating_gap": -0.20239700374531822, "impact": -0.012008888888888881, "reliable": "True"}, {"theme": "ui_ux", "mentions": 233.0, "share_of_reviews": 0.15533333333333332, "share_of_low_rated": 0.0, "avg_rating_when_mentioned": 4.669527896995708, "rating_gap": -1.456194563662375, "impact": -0.22619555555555557, "reliable": "True"}];
+const $=id=>document.getElementById(id),lab=t=>t.replace(/_/g,' ');
+function draw(){const m=$('metric').value,asc=m==='avg_rating_when_mentioned',d=[...D].sort((a,b)=>asc?a[m]-b[m]:b[m]-a[m]),max=Math.max(...d.map(x=>Math.abs(x[m])));
+$('chart').innerHTML='<table>'+d.map((x,i)=>{const v=x[m],w=Math.abs(v)/max*100,neg=v<0;return`<tr><td style="width:28px;color:#5f6368">${i+1}</td><td style="width:150px">${lab(x.theme)}</td><td><div class="bar" style="width:${w}%;background:${neg?'#9aa0a6':(i<3?'#1a73e8':'#8ab4f8')}"></div></td><td style="width:90px;text-align:right">${m.startsWith('share')?(v*100).toFixed(1)+'%':(Number.isInteger(v)?v:v.toFixed(3))}</td></tr>`}).join('')+'</table>';
+const top=d[0];$('insight').innerHTML=m==='mentions'?`By volume, <b>${lab(top.theme)}</b> looks like the priority — but its average rating is ${top.avg_rating_when_mentioned.toFixed(2)}★. Switch to <i>Impact</i> to see what actually drags the rating down.`:
+m==='impact'?`<b>${lab(top.theme)}</b> costs the most rating (impact ${top.impact.toFixed(3)}): mentioned in ${(top.share_of_reviews*100).toFixed(1)}% of reviews, which average ${top.avg_rating_when_mentioned.toFixed(2)}★. That's the recommendation — then test the fix.`:
+`Top on this view: <b>${lab(top.theme)}</b>.`}
+$('metric').onchange=draw;draw();
+</script></body></html>
