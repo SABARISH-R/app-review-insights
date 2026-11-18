@@ -1,13 +1,105 @@
 {
-  "performance": ["\\bslow", "\\blag", "\\bfreez", "\\bhang", "\\bloading", "takes forever", "\\bsluggish", "\\bstuck"],
-  "crashes_bugs": ["\\bcrash", "\\bbug", "\\berror", "\\bglitch", "not working", "doesn'?t work", "won'?t open", "force close", "\\bbroken"],
-  "login_account": ["\\blogin", "log in", "sign in", "\\bpassword", "\\botp\\b", "\\baccount", "verification", "locked out"],
-  "ads": ["\\bads?\\b", "\\badvert", "pop-?ups?\\b"],
-  "pricing": ["\\bprice", "expensive", "subscription", "paywall", "\\brefund", "\\bcharge", "\\bfees?\\b", "free trial", "\\bpremium"],
-  "ui_ux": ["interface", "\\bui\\b", "\\bux\\b", "\\bdesign", "\\blayout", "confusing", "navigat", "hard to find", "\\bmenu"],
-  "support": ["\\bsupport\\b", "customer service", "customer care", "no response", "\\bcomplaint"],
-  "battery_data": ["\\bbattery", "\\bdrain", "data usage", "storage", "overheat", "\\bheating"],
-  "missing_features": ["\\bfeature", "\\bmissing", "i wish", "option to", "please add", "need a", "should have"],
-  "notifications": ["notification", "\\balerts?\\b", "\\breminder"],
-  "updates": ["\\bupdate", "latest version", "new version"]
+ "performance": [
+  "\\bslow",
+  "\\blag",
+  "\\bfreez",
+  "\\bhang",
+  "\\bloading",
+  "takes forever",
+  "\\bsluggish",
+  "\\bstuck"
+ ],
+ "crashes_bugs": [
+  "\\bcrash",
+  "\\bbug",
+  "\\berror",
+  "\\bglitch",
+  "not working",
+  "doesn'?t work",
+  "won'?t open",
+  "force close",
+  "\\bbroken"
+ ],
+ "login_account": [
+  "\\blogin",
+  "log in",
+  "sign in",
+  "\\bpassword",
+  "\\botp\\b",
+  "\\baccount",
+  "verification",
+  "locked out"
+ ],
+ "ads": [
+  "\\bads?\\b",
+  "\\badvert",
+  "pop-?ups?\\b"
+ ],
+ "pricing": [
+  "\\bprice",
+  "expensive",
+  "subscription",
+  "paywall",
+  "\\brefund",
+  "\\bcharge",
+  "\\bfees?\\b",
+  "free trial",
+  "\\bpremium"
+ ],
+ "ui_ux": [
+  "interface",
+  "\\bui\\b",
+  "\\bux\\b",
+  "\\bdesign",
+  "\\blayout",
+  "confusing",
+  "navigat",
+  "hard to find",
+  "\\bmenu"
+ ],
+ "support": [
+  "\\bsupport\\b",
+  "customer service",
+  "customer care",
+  "no response",
+  "\\bcomplaint"
+ ],
+ "battery_data": [
+  "\\bbattery",
+  "\\bdrain",
+  "data usage",
+  "storage",
+  "overheat",
+  "\\bheating"
+ ],
+ "missing_features": [
+  "\\bfeature",
+  "\\bmissing",
+  "i wish",
+  "option to",
+  "please add",
+  "need a",
+  "should have"
+ ],
+ "notifications": [
+  "notification",
+  "\\balerts?\\b",
+  "\\breminder"
+ ],
+ "updates": [
+  "\\bupdate",
+  "latest version",
+  "new version"
+ ],
+ "playback": [
+  "\\bpaus",
+  "stops? playing",
+  "keeps stopping",
+  "won'?t play",
+  "can'?t play",
+  "\\bdisappear",
+  "no play button",
+  "skips? on (?:its|it'?s) own",
+  "plays? something else"
+ ]
 }

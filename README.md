@@ -14,6 +14,12 @@ For any reviews file you give it:
 - `reports/theme_metrics.csv` and `reports/monthly_trends.csv`: ready for Power BI or Tableau
 - Charts: rating distribution, top pain points by impact, monthly average rating
 
+## Real result: Spotify, 2022
+
+On 61,594 public Spotify Google Play reviews, crashes and playback failures cost the most rating, ahead of the more common pricing and ad complaints. A simple review-spike alert caught two incidents, including the 8 March 2022 login outage that Spotify confirmed in its own incident report. See [the findings](reports/spotify_2022/FINDINGS.md).
+
+![Incidents](reports/spotify_2022/incidents_2022.png)
+
 ## Sample output
 
 Generated from **synthetic demo reviews** (not real findings), so you can see the format:
@@ -57,7 +63,7 @@ It estimates how many rating points the average review loses because of that the
 ## Status
 
 - [x] Cleaning, theme tagging, impact scoring, charts, tests
-- [ ] Run on a real single-product review dataset and write up the findings in `docs/RECOMMENDATION.md`
+- [x] Run on a real single-product review dataset and write up the findings ([Spotify 2022](reports/spotify_2022/FINDINGS.md))
 - [ ] Validate theme tags against a hand-labelled sample of 100 reviews and report precision
 - [ ] Add sentiment so praise ("love the design") is separated from complaints
 
